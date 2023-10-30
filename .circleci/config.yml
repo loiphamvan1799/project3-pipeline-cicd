@@ -1,4 +1,6 @@
 version: 2.1
+orbs:
+  slack: circleci/slack@4.12.5
 
 jobs:
   build-frontend:
@@ -17,6 +19,11 @@ jobs:
       - save_cache:
           paths: [frontend/node_modules]
           key: frontend-build
+      - slack/notify:
+          branch_pattern: .+
+          channel: $SLACK_DEFAULT_CHANNEL
+          event: fail
+          template: basic_fail_1
 
   build-backend:
     docker:
@@ -34,6 +41,11 @@ jobs:
       - save_cache:
           paths: [backend/node_modules]
           key: backend-build
+      - slack/notify:
+          branch_pattern: .+
+          channel: $SLACK_DEFAULT_CHANNEL
+          event: fail
+          template: basic_fail_1
 
   test-frontend:
     docker:
@@ -48,6 +60,11 @@ jobs:
             cd frontend
             npm install
             npm run test
+      - slack/notify:
+          branch_pattern: .+
+          channel: $SLACK_DEFAULT_CHANNEL
+          event: fail
+          template: basic_fail_1
                 
   test-backend:
     docker:
@@ -62,6 +79,11 @@ jobs:
             cd backend
             npm install
             npm run test
+      - slack/notify:
+          branch_pattern: .+
+          channel: $SLACK_DEFAULT_CHANNEL
+          event: fail
+          template: basic_fail_1
 
   scan-frontend:
     docker:
@@ -77,6 +99,11 @@ jobs:
             npm install
             npm audit fix --force
             npm audit --audit-level=critical
+      - slack/notify:
+          branch_pattern: .+
+          channel: $SLACK_DEFAULT_CHANNEL
+          event: fail
+          template: basic_fail_1
 
   scan-backend:
     docker:
@@ -92,6 +119,11 @@ jobs:
             npm install
             npm audit fix --force
             npm audit --audit-level=critical
+      - slack/notify:
+          branch_pattern: .+
+          channel: $SLACK_DEFAULT_CHANNEL
+          event: fail
+          template: basic_fail_1
 
 workflows:
   default:
