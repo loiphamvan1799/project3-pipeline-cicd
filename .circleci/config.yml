@@ -3,7 +3,7 @@ orbs:
   slack: circleci/slack@4.9.3
 
 commands:
-  install_cli:
+  install_awscli:
     description: Configure Install CLI
     command: |
       curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
@@ -153,7 +153,7 @@ jobs:
       - image: amazon/aws-cli
     steps:
       - checkout
-      - install_cli
+      - install_awscli
       - run:
           name: Ensure back-end infrastructure exists
           command: |
