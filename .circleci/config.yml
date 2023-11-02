@@ -13,6 +13,17 @@ commands:
             unzip awscliv2.zip
             sudo ./aws/install
 
+  install_ansible:
+    description: Configure Install Ansible
+    steps:
+      - run:
+          name: Install ansible
+          command: |
+            sudo apt update
+            sudo apt install software-properties-common
+            sudo apt-add-repository --yes --update ppa:ansible/ansible
+            sudo apt install ansible
+
   destroy-environment:
     description: Destroy back-end and front-end cloudformation stacks given a workflow ID.
     parameters:
@@ -184,6 +195,27 @@ jobs:
           root: ~/
           paths:
             - project/.circleci/ansible/inventory.txt
+
+  configure-infrastructure:
+    docker:
+      - image: cimg/base:stable
+    steps:
+      - checkout
+      - add_ssh_key:
+          fingerprints: [d6:af:e5:3e:c7:4c:02:29:5c:f4:40:1c:31:0e:d5:c5]
+      - workspace:
+          at: ./workspace
+      - install_awscli
+      - install_ansible
+      - run:
+          name: Configure server
+          command: |
+            cd .circleci/ansible
+            ansible-playbook -i inventory.txt configure-server.yml
+      - persist_to_workspace:
+          root: ~/
+          paths:
+            - project/backend  
 
 workflows:
   default:
