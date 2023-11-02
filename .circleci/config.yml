@@ -179,11 +179,30 @@ jobs:
             aws ec2 describe-instances \
             --query 'Reservations[*].Instances[*].PublicIpAddress' \
             --filters "Name=tag:Project,Values=udapeople" \
-            --output text >> ~/.circleci/ansible/inventory.txt
+            --output text >> ~/project3-pipeline-cicd/.circleci/ansible/inventory.txt
       - persist_to_workspace:
           root: ~/
           paths:
-            - .circleci/ansible/inventory.txt
+            - project3-pipeline-cicd/.circleci/ansible/inventory.txt
+  
+  configure-infrastructure:
+    docker:
+      # Docker image here that supports Ansible
+    steps:
+      # Checkout code from git
+      # Add ssh keys with fingerprint
+      # attach workspace
+      - run:
+          name: Install dependencies
+          command: |
+            # Your code here
+            exit 1
+      - run:
+          name: Configure server
+          command: |
+            # Your code here
+            exit 1
+      # Here's where you will add some code to rollback on failure      
 
 workflows:
   default:
