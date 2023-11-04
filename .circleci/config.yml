@@ -211,6 +211,7 @@ jobs:
             --query 'Reservations[*].Instances[*].PublicIpAddress' \
             --filters "Name=tag:Project,Values=udapeople" \
             --output text >> ~/project/.circleci/ansible/inventory.txt
+            cat ~/project/.circleci/ansible/inventory.txt
       - persist_to_workspace:
           root: ~/
           paths:
@@ -242,8 +243,6 @@ jobs:
       - image: circleci/python:3.10
     steps:
       - checkout
-      - install_awscli
-      - install_nodejs
       - restore_cache:
           keys: [backend-build]
       - run:
