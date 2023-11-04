@@ -36,11 +36,12 @@ commands:
     description: Configure Install Nodejs 13.8.0
     steps:
       - run:
-          name: Install AWS CLI
+          name: Install Node.js 13.8.0
           command: |
-            sudo apt update
-            sudo apt install nodejs
-            sudo apt install npm
+            curl -fsSL https://deb.nodesource.com/setup_lts.x | sudo -E bash -
+            sudo apt install -y nodejs
+            sudo npm install --global n
+            sudo n 13.8.0
 
   destroy-environment:
     description: Destroy back-end and front-end cloudformation stacks given a workflow ID.
@@ -249,7 +250,6 @@ jobs:
           command: |
             cd backend
             npm install
-            npm i typeorm
             npm run migrations > migrations_dump.txt
       - run:
           name: Send migration results to kvdb
