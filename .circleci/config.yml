@@ -12,7 +12,6 @@ commands:
             curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
             unzip awscliv2.zip
             sudo ./aws/install
-
   install_python:
     description: Configure Install Python3
     steps:
@@ -39,10 +38,8 @@ commands:
       - run:
           name: Install AWS CLI
           command: |
-            curl --silent --location https://deb.nodesource.com/setup_0.12 | sudo bash -
-            sudo apt install -y nodejs
-            sudo npm install --global n
-            sudo n 13.8.0
+            sudo apt update
+            sudo apt install nodejs
 
   destroy-environment:
     description: Destroy back-end and front-end cloudformation stacks given a workflow ID.
@@ -269,6 +266,11 @@ jobs:
       - install_nodejs
       - attach_workspace:
           at: ~/
+      - run:
+          name: Install dependencies
+          command: |
+            cd frontend
+            npm install
       - run:
           name: Get backend url
           command: |
