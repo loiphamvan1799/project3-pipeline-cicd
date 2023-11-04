@@ -3,15 +3,16 @@ orbs:
   slack: circleci/slack@4.9.3
 
 commands:
-  install_awscli:
-    description: Configure Install CLI
+  install_awscl:
+    description: Configure Install awscli
     steps:
       - run:
-          name: Install AWS CLI
+          name: Install AWS CLI v2
           command: |
             curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
             unzip awscliv2.zip
             sudo ./aws/install
+
   install_python:
     description: Configure Install Python3
     steps:
