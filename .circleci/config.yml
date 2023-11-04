@@ -243,6 +243,7 @@ jobs:
       - image: circleci/python:3.10
     steps:
       - checkout
+      - install_nodejs
       - restore_cache:
           keys: [backend-build]
       - run:
