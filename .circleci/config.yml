@@ -223,7 +223,7 @@ jobs:
       - checkout
       - add_ssh_keys:
           fingerprints: [d6:af:e5:3e:c7:4c:02:29:5c:f4:40:1c:31:0e:d5:c5]
-      - workspace:
+      - attach_workspace:
           at: ./workspace
       - install_awscli
       - install_ansible
