@@ -3,7 +3,7 @@ orbs:
   slack: circleci/slack@4.9.3
 
 commands:
-  install_awscl:
+  install_awscli:
     description: Configure Install awscli
     steps:
       - run:
@@ -243,6 +243,7 @@ jobs:
       - image: circleci/python:3.10
     steps:
       - checkout
+      - install_awscli
       - install_nodejs
       - restore_cache:
           keys: [backend-build]
