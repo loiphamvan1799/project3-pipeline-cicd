@@ -453,9 +453,7 @@ jobs:
       - run:
           name: Remove old stacks and files
           command: |
-            export OldWorkflowID=$(aws cloudformation \
-                        list-exports --query "Exports[?Name==\`WorkflowID\`].Value" \
-                        --no-paginate --output text)
+            OldWorkflowID=$(curl --insecure https://kvdb.io/8FNTnQgtYwWicXZAjh6qMm/OldWorkflowId)
             echo old Workflow ID : "${OldWorkflowID}"
             if [[ "${CIRCLE_WORKFLOW_ID:0:7}" != "${OldWorkflowID:10:17}" ]]
             then
