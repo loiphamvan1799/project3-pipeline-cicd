@@ -73,14 +73,9 @@ commands:
           working_directory: ./backend
           when: on_fail
           command: |
-            SUCCESS=$(curl --insecure https://kvdb.io/7rgaSD1DtfMskmsAvWTBDX/migration_<< parameters.workflow_id >>)
-            echo $SUCCESS
-            if [[ "$SUCCESS" == "1" ]]
-            then
               cd ~/project/backend
               npm install
               npm run migration:revert
-            fi
 
 jobs:
   build-frontend:
@@ -405,9 +400,9 @@ jobs:
             echo $URL
             if curl ${URL} | grep "Welcome"
             then
-              exit 0
+              Return 1
             else
-              exit 1
+              return 1
             fi
       - destroy-environment:
           workflow_id: ${CIRCLE_WORKFLOW_ID:0:7}
@@ -457,12 +452,9 @@ jobs:
                         list-exports --query "Exports[?Name==\`WorkflowID\`].Value" \
                         --no-paginate --output text)
             echo old Workflow ID : "${OldWorkflowID}"
-            if [[ "${CIRCLE_WORKFLOW_ID:0:7}" != "${OldWorkflowID:10:17}" ]]
-            then
-              aws s3 rm "s3://udapeople-${OldWorkflowID:10:17}" --recursive
-              aws cloudformation delete-stack --stack-name "udapeople-backend-${OldWorkflowID:10:17}"
-              aws cloudformation delete-stack --stack-name "udapeople-frontend-${OldWorkflowID:10:17}"
-            fi
+            aws s3 rm "s3://udapeople-${OldWorkflowID:10:17}" --recursive
+            aws cloudformation delete-stack --stack-name "udapeople-backend-${OldWorkflowID:10:17}"
+            aws cloudformation delete-stack --stack-name "udapeople-frontend-${OldWorkflowID:10:17}"
 
 workflows:
   default:

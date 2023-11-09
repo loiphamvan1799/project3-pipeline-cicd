@@ -1,0 +1,12 @@
+1. Public Url to GitHub repository  (not private) [URL01]:
+https://github.com/loiphamvan1799/project3-pipeline-cicd
+
+2. Public URL for your S3 Bucket (aka, your green candidate front-end) [URL02]:
+http://udapeople-dca5e8b.s3.amazonaws.com/index.html#/employees
+
+3. Public URL for your CloudFront distribution (aka, your blue production front-end) [URL03]:
+http://d28fphcieq84se.cloudfront.net/#/employees
+
+4. Public URLs to deployed application back-end in EC2 [URL04]:
+[URL04-1] http://ec2-35-169-99-195.compute-1.amazonaws.com:3030/api/status
+[URL04-2] http://35.169.99.195:3030/api/status
