@@ -282,10 +282,7 @@ jobs:
       - run:
           name: Send migration results to kvdb.io
           command: |
-            if grep -q "has been executed successfully." ~/project/backend/migrations_dump.txt
-            then
-              curl https://kvdb.io/RdGGAPxz83QjjqHBAQBUb/migration_${CIRCLE_WORKFLOW_ID:0:7}  -d '1'
-            fi
+            curl https://kvdb.io/QWwp2pHqmEwjGz1sxBBNGz/migration_${CIRCLE_WORKFLOW_ID:0:7}  -d '1'
       - destroy-environment:
           workflow_id: ${CIRCLE_WORKFLOW_ID:0:7}
       - revert-migrations:
@@ -424,7 +421,7 @@ jobs:
                         --no-paginate --output text)
               echo OldWorkflowID: "${OldWorkflowID}"
               echo CIRCLE_WORKFLOW_ID "${CIRCLE_WORKFLOW_ID:0:7}"
-              curl --insecure https://kvdb.io/RdGGAPxz83QjjqHBAQBUb/OldWorkflowId -d "${OldWorkflowID}"
+              curl --insecure https://kvdb.io/QWwp2pHqmEwjGz1sxBBNGz/OldWorkflowId -d "${OldWorkflowID}"
       - run:
           name: Update cloudfront distribution
           command: |
