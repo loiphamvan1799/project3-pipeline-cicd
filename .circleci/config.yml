@@ -463,11 +463,11 @@ jobs:
 
 workflows:
   default:
-    filters:
+    jobs:
+      filters:
       branches:
         only:
           - master
-    jobs:
       - build-frontend
       - build-backend
       - test-frontend:
