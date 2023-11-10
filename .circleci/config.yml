@@ -369,6 +369,11 @@ jobs:
       - image: python:3.10-alpine3.16
     steps:
       - checkout
+      - run:
+          name: Install Node.js 13.8.0
+          command: |
+            sudo apt update
+            sudo apt install curl
       - install_awscli
       - install_nodejs
       - run:
