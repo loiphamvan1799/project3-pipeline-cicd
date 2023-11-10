@@ -447,13 +447,10 @@ jobs:
       - install_awscli
       - install_nodejs
       - run:
-          name: Get old stack workflow id
+          name: Remove old stacks and files
           command: |
             OldWorkflowID=$(curl --insecure https://kvdb.io/8FNTnQgtYwWicXZAjh6qMm/OldWorkflowId)
             echo old Workflow ID : "${OldWorkflowID}"
-      - run:
-          name: Remove old stacks and files
-          command: |
             if [[ "${CIRCLE_WORKFLOW_ID:0:7}" != "${OldWorkflowID:10:17}" ]]
             then
               aws s3 rm "s3://udapeople-${OldWorkflowID:10:17}" --recursive
