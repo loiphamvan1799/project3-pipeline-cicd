@@ -366,16 +366,9 @@ jobs:
 
   smoke-test:
     docker:
-      - image: python:3.10-alpine3.16
+      - image: cimg/base:stable
     steps:
       - checkout
-      - run:
-          name: Install curl
-          command: |
-            apt update -y
-            apt install sudo -y
-            sudo apt update
-            sudo apt install curl
       - install_awscli
       - install_nodejs
       - run:
