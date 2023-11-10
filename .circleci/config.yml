@@ -373,8 +373,10 @@ jobs:
           name: Install Dependencies
           command: |
             apk add --update curl
+            apk add --update sudo
             python -m pip install --upgrade pip
             python -m pip install awscli
+      - install_nodejs
       - run:
           name: Backend smoke test
           command: |
