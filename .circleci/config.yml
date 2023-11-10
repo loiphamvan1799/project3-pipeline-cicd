@@ -271,15 +271,14 @@ jobs:
     steps:
       - checkout
       - install_awscli
-      - install_nodejs
       - restore_cache:
           keys: [backend-build]
       - run:
           name: Run migrations
           command: |
             cd backend
-            sudo npm install
-            sudo npm run migrations
+            npm install
+            npm run migrations
       - destroy-environment:
           workflow_id: ${CIRCLE_WORKFLOW_ID:0:7}
       - revert-migrations:
