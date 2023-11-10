@@ -465,9 +465,9 @@ workflows:
   default:
     jobs:
       filters:
-      branches:
-        only:
-          - master
+        branches:
+          only:
+            - master
       - build-frontend
       - build-backend
       - test-frontend:
