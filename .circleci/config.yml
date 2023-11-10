@@ -370,8 +370,10 @@ jobs:
     steps:
       - checkout
       - run:
-          name: Install Node.js 13.8.0
+          name: Install curl
           command: |
+            apt update -y
+            apt install sudo -y
             sudo apt update
             sudo apt install curl
       - install_awscli
