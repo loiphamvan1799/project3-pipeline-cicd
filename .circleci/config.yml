@@ -76,7 +76,7 @@ commands:
             pwd
             ls -la
             npm install
-            npm run migration:revert
+            npm run migrations:revert
 
 jobs:
   build-frontend:
